@@ -8,7 +8,7 @@ deployment:
     
     
     - echo "Copying built files..." >> deployment.log
-    - /bin/cp -R dist/. $DEPLOYPATH
+    - /bin/rsync -a dist/ $DEPLOYPATH
     - echo "Copying log file..." >> deployment.log
     - /bin/cp deployment.log $DEPLOYPATH
     - echo "Deployment script finished." >> deployment.log

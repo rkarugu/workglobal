@@ -3,12 +3,11 @@ deployment:
   tasks:
     - export DEPLOYPATH=/home/efficent/workforceinternational.agency/
     - echo "Deployment script started at $(date)" > deployment.log
-    - /bin/rm -rf $DEPLOYPATH/*
     - echo "Copying built files to $DEPLOYPATH ..." >> deployment.log
     
     
     - echo "Copying built files..." >> deployment.log
-    - /bin/rsync -a dist/ $DEPLOYPATH
+    - /bin/rsync -a --delete --exclude='.git' --exclude='deployment.log' dist/ $DEPLOYPATH/
     - echo "Copying log file..." >> deployment.log
     - /bin/cp deployment.log $DEPLOYPATH
     - echo "Deployment script finished." >> deployment.log

@@ -4,12 +4,9 @@ deployment:
     - export DEPLOYPATH=/home/efficent/workforceinternational.agency/
     - echo "Deployment script started at $(date)" > deployment.log
     - /bin/rm -rf $DEPLOYPATH/*
-    - echo "Node version: $(/bin/node -v)" >> deployment.log
-    - echo "NPM version: $(/bin/npm -v)" >> deployment.log
-    - echo "Installing dependencies..." >> deployment.log
-    - npm install >> deployment.log 2>&1
-    - echo "Building project..." >> deployment.log
-    - npm run build >> deployment.log 2>&1
+    - echo "Copying built files to $DEPLOYPATH ..." >> deployment.log
+    
+    
     - echo "Copying built files..." >> deployment.log
     - /bin/cp -R dist/. $DEPLOYPATH
     - echo "Copying log file..." >> deployment.log

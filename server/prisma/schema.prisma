@@ -1,0 +1,39 @@
+// Prisma schema for WorkInt backend
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+enum SubmissionStatus {
+  PENDING
+  APPROVED
+  REJECTED
+}
+
+model Admin {
+  id            Int      @id @default(autoincrement())
+  email         String   @unique
+  passwordHash  String
+  submissions   Submission[] @relation("ApprovedBy")
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+}
+
+model Submission {
+  id          Int              @id @default(autoincrement())
+  formData    Json
+  status      SubmissionStatus @default(PENDING)
+  resumePath  String?
+  idCopyPath  String?
+  certPaths   Json?
+  paymentInfo Json?
+  approvedBy  Int?             
+  admin       Admin?           @relation("ApprovedBy", fields: [approvedBy], references: [id])
+  createdAt   DateTime         @default(now())
+  updatedAt   DateTime         @updatedAt
+}

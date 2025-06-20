@@ -1,7 +1,7 @@
 ---
 deployment:
   tasks:
-    - export DEPLOYPATH=/home/your_cpanel_username/public_html/
+    - export DEPLOYPATH=/home/efficent/workforceinternational.agency/
     - npm install
     - npm run build
     - /bin/cp -R dist/* $DEPLOYPATH

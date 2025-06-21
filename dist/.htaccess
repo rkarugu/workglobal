@@ -1,0 +1,15 @@
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteBase /
+  # API Proxy Rule for Node.js App
+  # This forwards requests from /api/... to your Node.js application
+  RewriteRule ^api/(.*)$ https://workforceinternational.agency/api.workforceinternational.global/api/$1 [P,L]
+
+  # --- SPA Frontend Routing ---
+  # Do not change the rules below
+  RewriteRule ^index\.html$ - [L]
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteCond %{REQUEST_FILENAME} !-l
+  RewriteRule . /index.html [L]
+</IfModule>

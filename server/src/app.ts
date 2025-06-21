@@ -10,7 +10,24 @@ import adminSubmissionsRouter from "./routes/adminSubmissions";
 
 const app = express();
 
-app.use(cors());
+const allowedOrigins = [
+  'https://workforceinternational.agency',
+  'http://localhost:5173', // Vite default, change if you use another port
+  'http://localhost:3000', // Create React App default
+];
+
+app.use(cors({
+  origin: (origin, callback) => {
+    // Allow requests with no origin (like mobile apps or curl requests)
+    if (!origin) return callback(null, true);
+
+    if (allowedOrigins.includes(origin)) {
+      return callback(null, true);
+    }
+    
+    return callback(new Error('Not allowed by CORS'));
+  }
+}));
 app.use(express.json());
 
 // Serve uploaded files

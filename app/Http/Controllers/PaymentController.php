@@ -162,4 +162,15 @@ class PaymentController extends Controller
     {
         return response()->json($payment);
     }
+
+    // Fetch all payments by phone number
+    public function byPhone(Request $request)
+    {
+        \Log::info('byPhone endpoint hit', ['phone' => $request->phone]);
+        $request->validate([
+            'phone' => ['required', 'string'],
+        ]);
+        $payments = Payment::where('phone', $request->phone)->orderBy('created_at', 'desc')->get();
+        return response()->json($payments);
+    }
 }

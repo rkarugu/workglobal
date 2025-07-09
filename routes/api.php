@@ -24,6 +24,7 @@ Route::post('/auth/login', [AuthController::class, 'login']);
 Route::post('/payments/mpesa', [PaymentController::class, 'initiate']);
 Route::post('/payments/mpesa/callback', [PaymentController::class, 'callback'])->name('mpesa.callback');
 Route::post('/payments/{payment}/verify', [PaymentController::class, 'verify']);
+Route::get('/payments/by-phone', [PaymentController::class, 'byPhone']);
 Route::get('/payments/{payment}', [PaymentController::class, 'show']);
 
 Route::middleware('auth:sanctum')->group(function () {

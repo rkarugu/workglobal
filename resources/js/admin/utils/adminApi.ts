@@ -12,7 +12,11 @@ export async function fetchSubmissions(token: string): Promise<Submission[]> {
       Authorization: `Bearer ${token}`,
     },
   });
-  return response.data;
+  // Map created_at to createdAt for each submission
+  return response.data.map((s: any) => ({
+    ...s,
+    createdAt: s.created_at || s.createdAt,
+  }));
 }
 
 export async function updateSubmissionStatus(
